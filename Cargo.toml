@@ -1,0 +1,13 @@
+[package]
+name = "performance"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[profile.dev]
+codegen-units = 1
+opt-level = 0
+lto = false
+strip = false
+debug = false
