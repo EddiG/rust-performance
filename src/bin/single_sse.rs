@@ -16,7 +16,29 @@ fn single_sse(input: &[u32]) -> u32 {
 fn main() {
     const COUNT: usize = 8 * 1024;
     let input = vec![1u32; COUNT];
-    for _ in 0..1000 {
-        single_sse(&input);
+
+    println!("Array size: {} elements", COUNT);
+    println!("Each element value: 1");
+    println!("Expected sum: {}", COUNT);
+
+    // Time the SIMD summation
+    let start = std::time::Instant::now();
+    let iterations = 1000;
+
+    let mut final_sum;
+    for i in 0..iterations {
+        final_sum = single_sse(&input);
+        if i == 0 {
+            // Print result of first iteration
+            println!("Actual sum using SIMD: {}", final_sum);
+        }
     }
+
+    let duration = start.elapsed();
+    println!("\nPerformance metrics:");
+    println!("Total time for {} iterations: {:?}", iterations, duration);
+    println!(
+        "Average time per iteration: {:?}",
+        duration / iterations as u32
+    );
 }
